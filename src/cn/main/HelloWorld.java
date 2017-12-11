@@ -1,5 +1,8 @@
 package cn.main;
 
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
+
 abstract class Demo {
     abstract public void func();
 }
@@ -14,7 +17,7 @@ class EasyThread extends Thread {
     @Override
     public void run() {
         Thread.currentThread().setPriority(priority);
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 3; i++) {
             try {
                 sleep(100);
             } catch (InterruptedException e) {
@@ -33,8 +36,8 @@ class ThreadSafeDeal implements Runnable {
 
     public void run() {
         while (ticket > 0) {
-            synchronized (this) {
-            //synchronized (" ") {
+            //synchronized (this) {
+            synchronized (" ") {
                 System.out.println(Thread.currentThread().getName() + " " + ticket);
                 ticket--;
             }
@@ -61,7 +64,7 @@ public class HelloWorld {
         EasyThread mt2 = new EasyThread(2);
         mt2.start();
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 3; i++) {
             System.out.println(Thread.currentThread().getName()
                     + " p : " + Thread.currentThread().getPriority()
                     + " count : " + i);
@@ -72,5 +75,16 @@ public class HelloWorld {
 
         ThreadSafeDeal ts2 = new ThreadSafeDeal();
         new Thread(ts2).start();
+
+        CapacityStack<String> cs = new CapacityStack<String>(2);
+        StdOut.println(cs.getItem() + " Capacity Stack:");
+        while (!StdIn.isEmpty()) {
+            String s = StdIn.readString();
+            if (!s.equals("-"))
+                cs.push(s);
+            else if (!cs.isEmpty())
+                StdOut.print(cs.pop() + " ");
+        }
+        StdOut.println("(" + cs.getNum() + " left on stack)");
     }
 }
