@@ -76,24 +76,17 @@ public class HelloWorld {
         ThreadSafeDeal ts2 = new ThreadSafeDeal();
         new Thread(ts2).start();
 
-//        CapacityStack<String> cs = new CapacityStack<String>(2);
-//        StdOut.println(cs.getItem() + " Capacity Stack:");
-//        while (!StdIn.isEmpty()) {
-//            String s = StdIn.readString();
-//            if (!s.equals("-"))
-//                cs.push(s);
-//            else if (!cs.isEmpty())
-//                StdOut.print(cs.pop() + " ");
-//        }
-//        StdOut.println("(" + cs.getNum() + " left on stack)");
-
-        ResizingArrayStack<String> as = new ResizingArrayStack<>(2);
+        //CapacityStack<String> e = new CapacityStack<String>(2);
+        //ResizingArrayStack<String> e = new ResizingArrayStack<>(2);
+        //SingleStack<String> e = new SingleStack<>();
+        SingleQueue<String> e = new SingleQueue<>();
         while (!StdIn.isEmpty()) {
             String s = StdIn.readString();
-            if (!s.equals("-"))
-                as.push(s);
-            else if (!as.isEmpty())
-                StdOut.print(as.pop() + " ");
+            if (!s.equals("-")) {
+                e.push(s);
+            } else if (!e.isEmpty()) {
+                StdOut.print(e.pop() + " ");
+            }
         }
     }
 }
