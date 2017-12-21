@@ -2,6 +2,8 @@ package cn.main;
 
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdRandom;
+import edu.princeton.cs.algs4.Stopwatch;
 
 abstract class Demo {
     abstract public void func();
@@ -47,12 +49,12 @@ class ThreadSafeDeal implements Runnable {
 
 public class HelloWorld {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        System.out.println("Hello World");
 
         Demo dm = new Demo() {
             @Override
             public void func() {
-                System.out.println("Demo func");
+                System.out.println("Demo");
             }
         };
 
@@ -75,6 +77,22 @@ public class HelloWorld {
 
         ThreadSafeDeal ts2 = new ThreadSafeDeal();
         new Thread(ts2).start();
+
+        int N = Integer.parseInt("1000");
+        int[] a = new int[N];
+        for (int i = 0; i < N; i++) {
+            a[i] = StdRandom.uniform(-1000000, 1000000);
+        }
+
+        Stopwatch timerN = new Stopwatch();
+        int cnt = ThreeSumZero.normalCount(a);
+        double time = timerN.elapsedTime();
+        StdOut.println("normalcount: " + cnt + " triples " + time + " seconds");
+
+        Stopwatch timerF = new Stopwatch();
+        cnt = ThreeSumZero.fastCount(a);
+        time = timerF.elapsedTime();
+        StdOut.println("normalcount: " + cnt + " triples " + time + " seconds");
 
         //CapacityStack<String> e = new CapacityStack<String>(2);
         //ResizingArrayStack<String> e = new ResizingArrayStack<>(2);
