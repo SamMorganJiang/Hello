@@ -1,9 +1,12 @@
 package cn.main;
 
+import edu.princeton.cs.algs4.DoublingTest;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.Stopwatch;
+
+import java.util.function.DoubleBinaryOperator;
 
 abstract class Demo {
     abstract public void func();
@@ -92,7 +95,15 @@ public class HelloWorld {
         Stopwatch timerF = new Stopwatch();
         cnt = ThreeSumZero.fastCount(a);
         time = timerF.elapsedTime();
-        StdOut.println("normalcount: " + cnt + " triples " + time + " seconds");
+        StdOut.println("fastcount: " + cnt + " triples " + time + " seconds");
+
+        double prev = DoublingTest.timeTrial(125);
+        for (int i = 250; i < 64000; i += i) {
+            time = DoublingTest.timeTrial(i);
+            StdOut.printf("%6d %7.1f ", i, time);
+            StdOut.printf("%5.1f\n", time / prev);
+            prev = time;
+        }
 
         //CapacityStack<String> e = new CapacityStack<String>(2);
         //ResizingArrayStack<String> e = new ResizingArrayStack<>(2);
