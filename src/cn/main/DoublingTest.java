@@ -6,6 +6,7 @@ import edu.princeton.cs.algs4.Stopwatch;
 public class DoublingTest {
     private static final int MAX = 1000000;
     private static int[] a;
+    private static int cnt;
 
     private DoublingTest(int N) {
         a = new int[N];
@@ -15,15 +16,27 @@ public class DoublingTest {
         }
     }
 
-    public static double normalTimeTrial() {
+    public static DoublingTest getObject(int N) {
+        return new DoublingTest(N);
+    }
+
+    public static int getMAX() {
+        return MAX;
+    }
+
+    public int getCnt() {
+        return cnt;
+    }
+
+    public double normalTimeTrial() {
         Stopwatch timer = new Stopwatch();
-        ThreeSumZero.normalCount(a);
+        cnt = ThreeSumZero.normalCount(a);
         return timer.elapsedTime();
     }
 
-    public static double fastTimeTrial() {
+    public double fastTimeTrial() {
         Stopwatch timer = new Stopwatch();
-        ThreeSumZero.fastCount(a);
+        cnt = ThreeSumZero.fastCount(a);
         return timer.elapsedTime();
     }
 }

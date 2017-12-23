@@ -3,10 +3,6 @@ package cn.main;
 import edu.princeton.cs.algs4.DoublingTest;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
-import edu.princeton.cs.algs4.StdRandom;
-import edu.princeton.cs.algs4.Stopwatch;
-
-import java.util.function.DoubleBinaryOperator;
 
 abstract class Demo {
     abstract public void func();
@@ -81,21 +77,12 @@ public class HelloWorld {
         ThreadSafeDeal ts2 = new ThreadSafeDeal();
         new Thread(ts2).start();
 
-        int N = Integer.parseInt("1000");
-        int[] a = new int[N];
-        for (int i = 0; i < N; i++) {
-            a[i] = StdRandom.uniform(-1000000, 1000000);
-        }
+        cn.main.DoublingTest target = cn.main.DoublingTest.getObject(1000);
+        double time = target.normalTimeTrial();
+        StdOut.println("normalcount: " + target.getCnt() + " triples " + time + " seconds");
 
-        Stopwatch timerN = new Stopwatch();
-        int cnt = ThreeSumZero.normalCount(a);
-        double time = timerN.elapsedTime();
-        StdOut.println("normalcount: " + cnt + " triples " + time + " seconds");
-
-        Stopwatch timerF = new Stopwatch();
-        cnt = ThreeSumZero.fastCount(a);
-        time = timerF.elapsedTime();
-        StdOut.println("fastcount: " + cnt + " triples " + time + " seconds");
+        time = target.fastTimeTrial();
+        StdOut.println("fastcount: " + target.getCnt() + " triples " + time + " seconds");
 
         double prev = DoublingTest.timeTrial(125);
         for (int i = 250; i < 64000; i += i) {
