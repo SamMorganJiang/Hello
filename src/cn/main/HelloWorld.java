@@ -76,33 +76,5 @@ public class HelloWorld {
 
         ThreadSafeDeal ts2 = new ThreadSafeDeal();
         new Thread(ts2).start();
-
-        cn.main.DoublingTest target = cn.main.DoublingTest.getObject(1000);
-        double time = target.normalTimeTrial();
-        StdOut.println("normalcount: " + target.getCnt() + " triples " + time + " seconds");
-
-        time = target.fastTimeTrial();
-        StdOut.println("fastcount: " + target.getCnt() + " triples " + time + " seconds");
-
-        double prev = DoublingTest.timeTrial(125);
-        for (int i = 250; i < 64000; i += i) {
-            time = DoublingTest.timeTrial(i);
-            StdOut.printf("%6d %7.1f ", i, time);
-            StdOut.printf("%5.1f\n", time / prev);
-            prev = time;
-        }
-
-        //CapacityStack<String> e = new CapacityStack<String>(2);
-        //ResizingArrayStack<String> e = new ResizingArrayStack<>(2);
-        //SingleStack<String> e = new SingleStack<>();
-        SingleQueue<String> e = new SingleQueue<>();
-        while (!StdIn.isEmpty()) {
-            String s = StdIn.readString();
-            if (!s.equals("-")) {
-                e.push(s);
-            } else if (!e.isEmpty()) {
-                StdOut.print(e.pop() + " ");
-            }
-        }
     }
 }

@@ -1,5 +1,6 @@
 package cn.main;
 
+import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.Stopwatch;
 
@@ -38,5 +39,22 @@ public class DoublingTest {
         Stopwatch timer = new Stopwatch();
         cnt = ThreeSumZero.fastCount(a);
         return timer.elapsedTime();
+    }
+
+    public static void main(String[] args) {
+        DoublingTest target = DoublingTest.getObject(1000);
+        double time = target.normalTimeTrial();
+        StdOut.println("normalcount: " + target.getCnt() + " triples " + time + " seconds");
+
+        time = target.fastTimeTrial();
+        StdOut.println("fastcount: " + target.getCnt() + " triples " + time + " seconds");
+
+        double prev = edu.princeton.cs.algs4.DoublingTest.timeTrial(125);
+        for (int i = 250; i < 64000; i += i) {
+            time = edu.princeton.cs.algs4.DoublingTest.timeTrial(i);
+            StdOut.printf("%6d %7.1f ", i, time);
+            StdOut.printf("%5.1f\n", time / prev);
+            prev = time;
+        }
     }
 }

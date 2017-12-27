@@ -1,5 +1,8 @@
 package cn.main;
 
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
+
 public class CapacityStack<Item> {
     private int num;
     private Item[] item;
@@ -38,5 +41,17 @@ public class CapacityStack<Item> {
         if (num > 0 && num == this.item.length / 4)
             reDefNum(this.item.length / 2);
         return item;
+    }
+
+    public static void main(String[] args) {
+        CapacityStack<String> e = new CapacityStack<String>(2);
+        while (!StdIn.isEmpty()) {
+            String s = StdIn.readString();
+            if (!s.equals("-")) {
+                e.push(s);
+            } else if (!e.isEmpty()) {
+                StdOut.print(e.pop() + " ");
+            }
+        }
     }
 }

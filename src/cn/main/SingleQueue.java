@@ -1,5 +1,8 @@
 package cn.main;
 
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
+
 import java.util.Iterator;
 
 public class SingleQueue<Item> implements Iterable<Item> {
@@ -73,6 +76,18 @@ public class SingleQueue<Item> implements Iterable<Item> {
         @Override
         public void remove() {
 
+        }
+    }
+
+    public static void main(String[] args) {
+        SingleQueue<String> e = new SingleQueue<>();
+        while (!StdIn.isEmpty()) {
+            String s = StdIn.readString();
+            if (!s.equals("-")) {
+                e.push(s);
+            } else if (!e.isEmpty()) {
+                StdOut.print(e.pop() + " ");
+            }
         }
     }
 }

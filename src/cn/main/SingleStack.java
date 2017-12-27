@@ -1,5 +1,8 @@
 package cn.main;
 
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
+
 import java.util.Iterator;
 
 public class SingleStack<Item> implements Iterable<Item> {
@@ -61,6 +64,18 @@ public class SingleStack<Item> implements Iterable<Item> {
         @Override
         public void remove() {
 
+        }
+    }
+
+    public static void main(String[] args) {
+        SingleStack<String> e = new SingleStack<>();
+        while (!StdIn.isEmpty()) {
+            String s = StdIn.readString();
+            if (!s.equals("-")) {
+                e.push(s);
+            } else if (!e.isEmpty()) {
+                StdOut.print(e.pop() + " ");
+            }
         }
     }
 }

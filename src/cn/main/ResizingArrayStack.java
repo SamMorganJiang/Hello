@@ -1,5 +1,8 @@
 package cn.main;
 
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
+
 import java.util.Iterator;
 
 public class ResizingArrayStack<Item> implements Iterable<Item> {
@@ -20,9 +23,7 @@ public class ResizingArrayStack<Item> implements Iterable<Item> {
 
     private void reSize(int max) {
         Item[] temp = (Item[]) new Object[max];
-        for (int i = 0; i < top; i++) {
-            temp[i] = this.item[i];
-        }
+        System.arraycopy(this.item, 0, temp, 0, top);
         this.item = temp;
     }
 
@@ -60,6 +61,18 @@ public class ResizingArrayStack<Item> implements Iterable<Item> {
         @Override
         public void remove() {
 
+        }
+    }
+
+    public static void main(String[] args) {
+        ResizingArrayStack<String> e = new ResizingArrayStack<>(2);
+        while (!StdIn.isEmpty()) {
+            String s = StdIn.readString();
+            if (!s.equals("-")) {
+                e.push(s);
+            } else if (!e.isEmpty()) {
+                StdOut.print(e.pop() + " ");
+            }
         }
     }
 }
