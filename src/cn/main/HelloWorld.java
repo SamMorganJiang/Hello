@@ -1,9 +1,5 @@
 package cn.main;
 
-import edu.princeton.cs.algs4.DoublingTest;
-import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut;
-
 abstract class Demo {
     abstract public void func();
 }
