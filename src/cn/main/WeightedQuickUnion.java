@@ -3,15 +3,18 @@ package cn.main;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
-public class quickUnion {
-    private int[] id;
+public class WeightedQuickUnion {
+    private int[] root;
+    private int[] rank;
     private int count;
 
-    quickUnion(int N) {
+    WeightedQuickUnion(int N) {
         count = N;
-        id = new int[N];
+        root = new int[N];
+        rank = new int[N];
         for (int i = 0; i < N; i++) {
-            id[i] = i;
+            root[i] = i;
+            rank[i] = 1;
         }
     }
 
@@ -20,7 +23,7 @@ public class quickUnion {
     }
 
     private int find(int p) {
-        while (p != id[p]) p = id[p];
+        while (p != root[p]) p = root[p];
         return p;
     }
 
@@ -34,21 +37,27 @@ public class quickUnion {
 
         if (pRoot == qRoot) return;
 
-        id[pRoot] = qRoot;
+        if (rank[p] < rank[q]) {
+            root[pRoot] = qRoot;
+            rank[qRoot] += pRoot;
+        } else {
+            root[qRoot] = pRoot;
+            rank[pRoot] += qRoot;
+        }
         count--;
     }
 
     public static void main(String[] args) {
         int N = StdIn.readInt();
-        quickUnion qu = new quickUnion(N);
+        WeightedQuickUnion w = new WeightedQuickUnion(N);
         while (!StdIn.isEmpty()) {
             int p = StdIn.readInt();
             int q = StdIn.readInt();
 
-            if (qu.connected(p, q)) continue;
-            qu.union(p, q);
+            if (w.connected(p, q)) continue;
+            w.union(p, q);
             StdOut.println(p + " " + q);
         }
-        StdOut.println(qu.getCount() + "components");
+        StdOut.println(w.getCount() + "components");
     }
 }
